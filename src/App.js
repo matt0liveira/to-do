@@ -8,9 +8,7 @@ export default function() {
   return (
     <BoxContainer>
       <Header />
-      <hr />
       <AddTask />
-      <hr />
       <TaskList />
     </BoxContainer>
   )

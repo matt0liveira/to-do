@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { HeaderAddTaskContainer } from './HeaderAddTaskStyle'
 
 export default function() {
 	const [currentDay, setCurrentDay] = useState({
@@ -9,7 +10,7 @@ export default function() {
 
 	Date.prototype.getWeekDayText = function() {
 		let weekDays = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado']
-		return weekDays[this.getMonth()]
+		return weekDays[this.getDay()]
 	}
 
 	Date.prototype.getMonthText = function() {
@@ -24,9 +25,9 @@ export default function() {
 		let month = d.getMonthText()
 
 		setCurrentDay({
-			dayWeek: dayWeek < 10 ? '0' + dayWeek : dayWeek,
+			dayWeek: dayWeek,
 			dayNumber: dayNumber < 10 ? '0' + dayNumber : dayNumber,
-			month: month < 10 ? '0' + month : month
+			month: month
 		})
 	}
 
@@ -35,9 +36,9 @@ export default function() {
 	}, []);
 
     return (
-			<div className="header">
-				<h1>Meu dia</h1>
+			<HeaderAddTaskContainer>
+				<h2 className="header--title">Meu dia</h2>
 				<p>{ `${currentDay.dayWeek}, ${currentDay.dayNumber} de ${currentDay.month}` }</p>
-			</div>
+			</HeaderAddTaskContainer>
     )
 }

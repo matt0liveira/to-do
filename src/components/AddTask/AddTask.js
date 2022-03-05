@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { Container } from './AddTaskStyle'
+import { AddTaskContainer } from './AddTaskStyle'
 import AddIcon from '@mui/icons-material/Add'
 import HeaderAddTask from '../HeaderAddTask/HeaderAddTask'
 import { useDispatch } from 'react-redux'
 import { addTask } from '../../redux/reducers/taskReducer'
-import { useAppSelector } from '../../redux/hooks/useAppSelector'
 
 export default function() {
 	const dispatch = useDispatch()
-	const tasks = useAppSelector(item => item.task)
 
 	let d = new Date()
 	let day = d.getDate()
@@ -40,17 +38,20 @@ export default function() {
 	}
 
   return(
-		<Container>
+		<AddTaskContainer>
 			<HeaderAddTask />
 			<form className="formAddTask" onSubmit={ handleSubmit }>
-				<input 
-					type="text"
-					name="title"
-					id="title"
-					placeholder="Adicionar uma tarefa" 
-					value={ task.title }
-					onChange={ e => setTask({ title: e.target.value, date: task.date }) } 
-					required />
+				<div className="formAddTask--field">
+					<AddIcon style={{ color: '#999', marginLeft: '10px'}} />
+					<input 
+						type="text"
+						name="task--title"
+						id="task--title"
+						placeholder="Adicionar uma tarefa" 
+						value={ task.title }
+						onChange={ e => setTask({ title: e.target.value, date: task.date }) } 
+						required />
+				</div>
 
 				<div className="task--bottomLine">
 					<div className="task--inputsOptionals">
@@ -64,13 +65,14 @@ export default function() {
 					</div>
 
 					<button 
-						className="btn-action btn--submit"
-						disabled={!task.title ? true : false}>
+						className="btn-submit"
+						disabled={!task.title ? true : false}
+						style={{backgroundColor: task.title ? '#007bff' : '#999', color: task.title ? '#fff' : ''}}>
 							<AddIcon />
 							Adicionar
 					</button>
 				</div>
 			</form>
-		</Container>
+		</AddTaskContainer>
 	)
 }

@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Description
+
+The project is a task marker created with React JS, Styled Components, Redux and Material Icons.
+
 ## Available Scripts
 
 In the project directory, you can run:
