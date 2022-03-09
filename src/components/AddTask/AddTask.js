@@ -23,11 +23,18 @@ export default function() {
 		status: 'pending'
 	})
 
+	function formatDate(date) {
+		let arrayDate = date.split('-')
+		arrayDate[1]++
+		arrayDate[1] = arrayDate[1] < 10 ? '0' + arrayDate[1] : arrayDate[1]
+		return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault()
 		dispatch(addTask({
 			title: task.title,
-			date: task.date,
+			date: formatDate(task.date),
 			favorite: task.favorite,
 			status: task.status
 		}))
@@ -50,6 +57,7 @@ export default function() {
 						placeholder="Adicionar uma tarefa" 
 						value={ task.title }
 						onChange={ e => setTask({ title: e.target.value, date: task.date }) } 
+						autoComplete="off"
 						required />
 				</div>
 

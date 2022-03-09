@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const AddTaskContainer = styled.div`
 	width: 97%;
-	margin: auto;
 	
 	.formAddTask {
 		width: 100%;

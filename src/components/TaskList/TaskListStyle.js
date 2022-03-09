@@ -2,8 +2,7 @@ import styled from 'styled-components'
 
 export const TaskListContainer = styled.div`
 	width: 97%;
-	margin: auto;
-
+	
 	.taskList--item {
 		height: 10vh;
 		display: flex;

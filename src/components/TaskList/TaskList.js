@@ -13,16 +13,11 @@ export default function() {
   let tasks = useAppSelector(state => state.task)
   const dispatch = useDispatch()
   const [taskList, setTaskList] = useState([])
-  const [currentDate, setCurrentDate] = useState({
-    day: '',
-    month: '',
-    year: ''
-  })
 
   useEffect(() => {
-    const sortTaskList = [...tasks]
+    let sortTaskList = [...tasks]
     sortTaskList.sort(item => item.favorite ? -1 : 1)
-    tasks = [...sortTaskList]
+    tasks = sortTaskList
     setTaskList(tasks)
   }, [tasks])
 
@@ -37,33 +32,21 @@ export default function() {
   }
 
   function handleToggleFavorite(id) {
-    dispatch(toggleFavorite({
-      id: id
-    }))
+    dispatch(toggleFavorite({id: id}))
   }
 
   function handleToggleConclude(id) {
-    dispatch(toggleConclude({
-      id: id
-    }))
+    dispatch(toggleConclude({id: id}))
   }
 
-  function getCurrentDate() {
-    let d = new Date()
-    let day = d.getDate()
-    let month = d.getMonth()
-    let year = d.getFullYear()
-    
-    setCurrentDate({
-      day: day < 10 ? '0' + day : day,
-      month: month < 10 ? '0' + month : month,
-      year: year < 10 ? '0' + year : year
-    })
-  }
-
-  useEffect(() => {
-    getCurrentDate()
-  }, [])
+  let d = new Date()
+	let day = d.getDate()
+	let month = d.getMonth()
+	day = day < 10 ? '0' + day : day
+  month++
+	month = month < 10 ? '0' + month : month
+	let year = d.getFullYear()
+	let	currentDateFormatted = `${day}/${month}/${year}`
 
   return (
 		<TaskListContainer>
@@ -81,7 +64,8 @@ export default function() {
               }
             </button>
             <p>{ item.title }</p>
-            <div className="divider" style={{ backgroundColor: item.favorite ? '#fdc308' : '' }} /> { item.date ===  `${currentDate.year}-${currentDate.month}-${currentDate.day}` ? 'Hoje' : item.date }
+            <div className="divider" style={{ backgroundColor: item.favorite ? '#fdc308' : '' }} /> 
+            { item.date ===  currentDateFormatted ? 'Hoje' : item.date  }
           </div>
         
           <div className="taskList--actions">
@@ -96,7 +80,7 @@ export default function() {
             </button>
 
             <button className="btn--remove" onClick={() => handleRemoveTask(item.id)}>
-            <RemoveCircleOutlineIcon style={{ color: '#bb2d3b' }} />
+              <RemoveCircleOutlineIcon style={{ color: '#bb2d3b' }} />
             </button>
           </div>
         </div>

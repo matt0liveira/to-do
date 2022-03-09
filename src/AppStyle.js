@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 export const BoxContainer = styled.div`
     width: 100vw;
-    min-height: 100vh;
-    max-height: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
 `

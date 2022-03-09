@@ -29,7 +29,7 @@ export const slice = createSlice({
 
 		toggleFavorite: (state, action) => {
 			if(action.payload?.id) {
-				const newState = [...state]
+				let newState = [...state]
 				for(let i = 0; i < newState.length; i++) {
 					if(newState[i].id === action.payload?.id) {
 						newState[i].favorite = !newState[i].favorite
@@ -40,7 +40,7 @@ export const slice = createSlice({
 
 		toggleConclude: (state, action) => {
 			if(action.payload?.id) {
-				const newState = [...state]
+				let newState = [...state]
 				for(let i = 0; i < newState.length; i++) {
 					if(newState[i].id === action.payload?.id) {
 						newState[i].status === 'pending' ? newState[i].status = 'done' : newState[i].status = 'pending'
